@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}DiabPredict - Inicio{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold text-primary mb-3">
+                <i class="bi bi-heart-pulse"></i> DiabPredict
+            </h1>
+            <h2 class="h3 text-secondary mb-4">
+                Sistema de Predicción de Riesgo de Diabetes Tipo 2
+            </h2>
+            <p class="lead mb-4">
+                DiabPredict es una plataforma de evaluación de riesgo que utiliza parámetros clínicos 
+                para proporcionar una estimación del riesgo de diabetes. Esta herramienta está diseñada 
+                con fines preventivos y educativos.
+            </p>
+            <div class="d-grid gap-2 d-md-block">
+                <a href="{{ url_for('main.formulario') }}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-clipboard-data"></i> Comenzar Evaluación
+                </a>
+                <a href="{{ url_for('main.ayuda') }}" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-question-circle"></i> Cómo Funciona
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center">
+            <i class="bi bi-activity text-primary" style="font-size: 15rem; opacity: 0.2;"></i>
+        </div>
+    </div>
+
+    <!-- ¿Cómo Funciona? -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="h2 text-center mb-4">¿Cómo Funciona Nuestro Sistema?</h3>
+        </div>
+        <div class="col-md-3 text-center mb-4">
+            <div class="card h-100 border-primary">
+                <div class="card-body">
+                    <i class="bi bi-1-circle-fill text-primary" style="font-size: 3rem;"></i>
+                    <h4 class="card-title mt-3">Ingreso de Datos</h4>
+                    <p class="card-text">
+                        El usuario ingresa 8 parámetros clínicos requeridos para realizar 
+                        la evaluación de riesgo de diabetes.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-4">
+            <div class="card h-100 border-primary">
+                <div class="card-body">
+                    <i class="bi bi-2-circle-fill text-primary" style="font-size: 3rem;"></i>
+                    <h4 class="card-title mt-3">Análisis en Tiempo Real</h4>
+                    <p class="card-text">
+                        El sistema procesa los datos de manera temporal durante el 
+                        análisis. Tus datos no se almacenan permanentemente.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-4">
+            <div class="card h-100 border-primary">
+                <div class="card-body">
+                    <i class="bi bi-3-circle-fill text-primary" style="font-size: 3rem;"></i>
+                    <h4 class="card-title mt-3">Predicción de Riesgo</h4>
+                    <p class="card-text">
+                        Una vez completado el análisis, el sistema presenta la clasificación 
+                        de riesgo, probabilidad y recomendaciones personalizadas.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-4">
+            <div class="card h-100 border-primary">
+                <div class="card-body">
+                    <i class="bi bi-4-circle-fill text-primary" style="font-size: 3rem;"></i>
+                    <h4 class="card-title mt-3">Privacidad Garantizada</h4>
+                    <p class="card-text">
+                        Los datos se procesan localmente y no se comparten con terceros. 
+                        Tu privacidad es nuestra prioridad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advertencia Importante -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="alert alert-warning border-warning">
+                <h4 class="alert-heading">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Advertencia Importante
+                </h4>
+                <p class="mb-0">
+                    Esta herramienta proporciona únicamente una estimación del riesgo basada en datos ingresados y 
+                    <strong>NO constituye un diagnóstico médico</strong>. Los resultados deben ser interpretados 
+                    exclusivamente por un profesional de la salud calificado. Si tienes preocupaciones sobre tu salud, 
+                    consulta con tu médico.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beneficios de la Detección Temprana -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="h2 text-center mb-4">Beneficios de la Detección Temprana</h3>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-success h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-shield-check text-success me-2" style="font-size: 2rem;"></i>
+                        <h5 class="card-title mb-0">Prevención Efectiva</h5>
+                    </div>
+                    <p class="card-text">
+                        Las intervenciones tempranas en estilo de vida pueden reducir entre un 30% y 50% 
+                        el riesgo de progresión a diabetes establecida.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-info h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-heart text-info me-2" style="font-size: 2rem;"></i>
+                        <h5 class="card-title mb-0">Reducción de Complicaciones</h5>
+                    </div>
+                    <p class="card-text">
+                        El control temprano ayuda a prevenir complicaciones como enfermedad cardiovascular, 
+                        nefropatía, retinopatía y neuropatía.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-graph-up text-primary me-2" style="font-size: 2rem;"></i>
+                        <h5 class="card-title mb-0">Mejor Calidad de Vida</h5>
+                    </div>
+                    <p class="card-text">
+                        La identificación y manejo temprano permite mantener una mejor calidad de vida 
+                        y reducir la necesidad de tratamientos más intensivos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center py-5">
+                    <h3 class="card-title">¿Listo para evaluar tu riesgo?</h3>
+                    <p class="card-text lead">
+                        Completa el formulario de evaluación en menos de 5 minutos
+                    </p>
+                    <a href="{{ url_for('main.formulario') }}" class="btn btn-light btn-lg">
+                        <i class="bi bi-clipboard-data"></i> Comenzar Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

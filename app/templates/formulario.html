@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Formulario de Evaluación - DiabPredict{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">
+                        <i class="bi bi-clipboard-data"></i> Formulario de Evaluación
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">
+                        Ingrese los siguientes parámetros clínicos para realizar la evaluación de riesgo. 
+                        Todos los campos son obligatorios.
+                    </p>
+
+                    <form id="evaluationForm">
+                        <!-- Embarazos -->
+                        <div class="mb-3">
+                            <label for="pregnancies" class="form-label">
+                                <strong>Número de Embarazos Previos</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Conteo total de embarazos previos (0-20)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="pregnancies" name="pregnancies" 
+                                   min="0" max="20" step="1" required>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 0 y 20
+                            </div>
+                        </div>
+
+                        <!-- Glucosa -->
+                        <div class="mb-3">
+                            <label for="glucose" class="form-label">
+                                <strong>Concentración de Glucosa Plasmática (mg/dL)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Nivel de glucosa 2 horas después de prueba oral (0-250 mg/dL)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="glucose" name="glucose" 
+                                   min="0" max="250" step="1" required>
+                            <div class="form-text">Valor normal en ayunas: 70-100 mg/dL</div>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 0 y 250 mg/dL
+                            </div>
+                        </div>
+
+                        <!-- Presión Arterial -->
+                        <div class="mb-3">
+                            <label for="blood_pressure" class="form-label">
+                                <strong>Presión Arterial Diastólica (mmHg)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Presión arterial diastólica (número inferior) (40-140 mmHg)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="blood_pressure" name="blood_pressure" 
+                                   min="40" max="140" step="1" required>
+                            <div class="form-text">Valor normal: 60-80 mmHg</div>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 40 y 140 mmHg
+                            </div>
+                        </div>
+
+                        <!-- Grosor Pliegue Cutáneo -->
+                        <div class="mb-3">
+                            <label for="skin_thickness" class="form-label">
+                                <strong>Grosor del Pliegue Cutáneo Tricipital (mm)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Medición en la parte posterior del brazo (0-99 mm)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="skin_thickness" name="skin_thickness" 
+                                   min="0" max="99" step="1" required>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 0 y 99 mm
+                            </div>
+                        </div>
+
+                        <!-- Insulina -->
+                        <div class="mb-3">
+                            <label for="insulin" class="form-label">
+                                <strong>Concentración de Insulina Sérica (µU/mL)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Nivel de insulina 2 horas después de carga de glucosa (0-850 µU/mL)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="insulin" name="insulin" 
+                                   min="0" max="850" step="1" required>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 0 y 850 µU/mL
+                            </div>
+                        </div>
+
+                        <!-- IMC -->
+                        <div class="mb-3">
+                            <label for="bmi" class="form-label">
+                                <strong>Índice de Masa Corporal (kg/m²)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Peso (kg) / (Altura (m))² (10.0-70.0)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="bmi" name="bmi" 
+                                   min="10" max="70" step="0.1" required>
+                            <div class="form-text">Valor normal: 18.5-24.9 kg/m²</div>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 10.0 y 70.0 kg/m²
+                            </div>
+                        </div>
+
+                        <!-- Función de Pedigree -->
+                        <div class="mb-3">
+                            <label for="pedigree_function" class="form-label">
+                                <strong>Función de Pedigree Diabético</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Probabilidad de diabetes basada en historia familiar (0.078-2.5)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="pedigree_function" name="pedigree_function" 
+                                   min="0.078" max="2.5" step="0.001" required>
+                            <div class="form-text">Valor promedio: 0.5</div>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 0.078 y 2.5
+                            </div>
+                        </div>
+
+                        <!-- Edad -->
+                        <div class="mb-3">
+                            <label for="age" class="form-label">
+                                <strong>Edad (años)</strong>
+                                <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" 
+                                   title="Edad en años completos (18-120)"></i>
+                            </label>
+                            <input type="number" class="form-control" id="age" name="age" 
+                                   min="18" max="120" step="1" required>
+                            <div class="invalid-feedback">
+                                El valor debe estar entre 18 y 120 años
+                            </div>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <i class="bi bi-calculator"></i> Evaluar Riesgo
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i> Limpiar Formulario
+                            </button>
+                        </div>
+
+                        <!-- Mensaje de carga -->
+                        <div id="loadingMessage" class="alert alert-info mt-3" style="display: none;">
+                            <div class="d-flex align-items-center">
+                                <div class="spinner-border spinner-border-sm me-2" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <span>Procesando evaluación...</span>
+                            </div>
+                        </div>
+
+                        <!-- Mensaje de error -->
+                        <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-lightbulb"></i> Consejos para completar el formulario
+                    </h5>
+                    <ul class="mb-0">
+                        <li>Si no conoce un valor exacto, consulte con su médico antes de usar esta herramienta</li>
+                        <li>Para la función de pedigree diabético, si no la conoce, puede usar 0.5 como valor promedio</li>
+                        <li>Asegúrese de que los valores de glucosa e insulina sean mediciones recientes</li>
+                        <li>Si algún valor es 0 y no es biológicamente plausible, el sistema lo detectará</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Inicializar tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+// Manejar envío del formulario
+document.getElementById('evaluationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Validar formulario
+    if (!this.checkValidity()) {
+        e.stopPropagation();
+        this.classList.add('was-validated');
+        return;
+    }
+    
+    // Obtener datos del formulario
+    const formData = {
+        pregnancies: parseFloat(document.getElementById('pregnancies').value),
+        glucose: parseFloat(document.getElementById('glucose').value),
+        blood_pressure: parseFloat(document.getElementById('blood_pressure').value),
+        skin_thickness: parseFloat(document.getElementById('skin_thickness').value),
+        insulin: parseFloat(document.getElementById('insulin').value),
+        bmi: parseFloat(document.getElementById('bmi').value),
+        pedigree_function: parseFloat(document.getElementById('pedigree_function').value),
+        age: parseFloat(document.getElementById('age').value)
+    };
+    
+    // Mostrar mensaje de carga
+    document.getElementById('loadingMessage').style.display = 'block';
+    document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('submitBtn').disabled = true;
+    
+    try {
+        // Enviar solicitud al servidor
+        const response = await fetch('/api/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            // Redirigir a página de resultados
+            window.location.href = `/resultados/${data.evaluation_id}`;
+        } else {
+            // Mostrar error
+            document.getElementById('errorMessage').textContent = 
+                'Error: ' + (data.error || 'No se pudo completar la evaluación');
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('submitBtn').disabled = false;
+        }
+    } catch (error) {
+        document.getElementById('errorMessage').textContent = 
+            'Error de conexión. Por favor, intente nuevamente.';
+        document.getElementById('errorMessage').style.display = 'block';
+        document.getElementById('loadingMessage').style.display = 'none';
+        document.getElementById('submitBtn').disabled = false;
+    }
+});
+</script>
+{% endblock %}
