@@ -11,15 +11,22 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import joblib
 import os
+import sys
 from pathlib import Path
+
+# Obtener rutas absolutas
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT_DIR = SCRIPT_DIR.parent.parent
+DATA_FILE = ROOT_DIR / 'data' / 'raw' / 'diabetes.csv'
+MODELS_DIR = ROOT_DIR / 'ml' / 'models'
 
 
 class DiabetesModelTrainer:
     """Clase para entrenar modelos de predicción de diabetes"""
 
-    def __init__(self, data_path='../../data/raw/diabetes.csv', models_dir='../models'):
-        self.data_path = data_path
-        self.models_dir = Path(models_dir)
+    def __init__(self, data_path=None, models_dir=None):
+        self.data_path = data_path or DATA_FILE
+        self.models_dir = Path(models_dir) if models_dir else MODELS_DIR
         self.models_dir.mkdir(parents=True, exist_ok=True)
 
         self.X_train = None
@@ -41,15 +48,16 @@ class DiabetesModelTrainer:
 
         try:
             df = pd.read_csv(self.data_path)
-            print(f"✓ Dataset cargado exitosamente")
+            print(f"[OK] Dataset cargado exitosamente")
             print(f"  - Instancias totales: {len(df)}")
-            print(f"  - Características: {len(df.columns) - 1}")
+            print(f"  - Caracteristicas: {len(df.columns) - 1}")
             print(f"  - Casos positivos (diabetes): {df['Outcome'].sum()} ({df['Outcome'].sum() / len(df) * 100:.1f}%)")
             print(
                 f"  - Casos negativos: {len(df) - df['Outcome'].sum()} ({(len(df) - df['Outcome'].sum()) / len(df) * 100:.1f}%)")
             return df
         except Exception as e:
-            print(f"✗ Error al cargar el dataset: {e}")
+            print(f"[ERROR] Error al cargar el dataset: {e}")
+            print(f"[INFO] Ruta buscada: {self.data_path}")
             raise
 
     def preprocess_data(self, df):
@@ -98,7 +106,7 @@ class DiabetesModelTrainer:
         self.y_val = y_val
         self.y_test = y_test
 
-        print("  ✓ Datos normalizados usando media y desviación estándar del conjunto de entrenamiento")
+        print("  [OK] Datos normalizados usando media y desviacion estandar del conjunto de entrenamiento")
 
     def train_logistic_regression(self):
         """Entrena modelo de Regresión Logística"""
@@ -119,7 +127,7 @@ class DiabetesModelTrainer:
         print("Optimizando hiperparámetros...")
         grid_search.fit(self.X_train, self.y_train)
 
-        print(f"\n✓ Mejores parámetros encontrados:")
+        print(f"\n[OK] Mejores parametros encontrados:")
         for param, value in grid_search.best_params_.items():
             print(f"  - {param}: {value}")
 
@@ -144,7 +152,7 @@ class DiabetesModelTrainer:
         print("Optimizando hiperparámetros...")
         grid_search.fit(self.X_train, self.y_train)
 
-        print(f"\n✓ Mejores parámetros encontrados:")
+        print(f"\n[OK] Mejores parametros encontrados:")
         for param, value in grid_search.best_params_.items():
             print(f"  - {param}: {value}")
 
@@ -169,7 +177,7 @@ class DiabetesModelTrainer:
         print("Optimizando hiperparámetros...")
         grid_search.fit(self.X_train, self.y_train)
 
-        print(f"\n✓ Mejores parámetros encontrados:")
+        print(f"\n[OK] Mejores parametros encontrados:")
         for param, value in grid_search.best_params_.items():
             print(f"  - {param}: {value}")
 
@@ -222,13 +230,13 @@ class DiabetesModelTrainer:
         # Guardar escalador
         scaler_path = self.models_dir / 'scaler.pkl'
         joblib.dump(self.scaler, scaler_path)
-        print(f"✓ Escalador guardado: {scaler_path}")
+        print(f"[OK] Escalador guardado: {scaler_path}")
 
         # Guardar cada modelo
         for model_name, model in self.models.items():
             model_path = self.models_dir / f'{model_name}.pkl'
             joblib.dump(model, model_path)
-            print(f"✓ Modelo guardado: {model_path}")
+            print(f"[OK] Modelo guardado: {model_path}")
 
     def train_all(self):
         """Ejecuta el pipeline completo de entrenamiento"""
@@ -253,9 +261,9 @@ class DiabetesModelTrainer:
         print("\n" + "=" * 70)
         print("RESUMEN FINAL")
         print("=" * 70)
-        print("\n✓ Entrenamiento completado exitosamente")
-        print(f"✓ {len(self.models)} modelos entrenados y guardados")
-        print(f"✓ Todos los modelos superan el 75% de precisión requerida")
+        print("\n[OK] Entrenamiento completado exitosamente")
+        print(f"[OK] {len(self.models)} modelos entrenados y guardados")
+        print(f"[OK] Todos los modelos superan el 75% de precision requerida")
 
         return self.models, self.results
 

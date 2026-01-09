@@ -1,10 +1,223 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Resultados - DiabPredict{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5 fw-bold text-primary">
+                <i class="bi bi-clipboard-check"></i> Resultados de Evaluación
+            </h1>
+            <p class="text-muted">
+                <i class="bi bi-calendar"></i> {{ evaluation.timestamp }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Nivel de Riesgo -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="risk-indicator risk-{{ evaluation.result.risk_level|lower }}">
+                <h2 class="mb-0">Nivel de Riesgo: {{ evaluation.result.risk_level }}</h2>
+                <p class="h4 mt-2 mb-0">Probabilidad: {{ evaluation.result.probability }}%</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Probabilidad -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Probabilidad de Diabetes</h5>
+                    <div class="probability-bar">
+                        <div class="probability-fill probability-{{ evaluation.result.risk_level|lower }}"
+                            style="width: {{ evaluation.result.probability }}%">
+                            {{ evaluation.result.probability }}%
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <small class="text-success">0% (Bajo)</small>
+                        <small class="text-warning">50% (Medio)</small>
+                        <small class="text-danger">100% (Alto)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Predicciones Individuales -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-cpu"></i> Predicciones por Modelo</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">Regresión Logística</h6>
+                                    <h3 class="text-primary">{{
+                                        evaluation.result.individual_predictions.logistic_regression }}%</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">Random Forest</h6>
+                                    <h3 class="text-success">{{ evaluation.result.individual_predictions.random_forest
+                                        }}%</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">SVM</h6>
+                                    <h3 class="text-info">{{ evaluation.result.individual_predictions.svm }}%</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-0">
+                        <small>
+                            <i class="bi bi-info-circle"></i>
+                            La probabilidad final ({{ evaluation.result.probability }}%) es el promedio de las tres
+                            predicciones.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parámetros Ingresados -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0"><i class="bi bi-clipboard-data"></i> Parámetros Clínicos Ingresados</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover parameters-table">
+                            <thead>
+                                <tr>
+                                    <th>Parámetro</th>
+                                    <th>Valor</th>
+                                    <th>Unidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Número de Embarazos</td>
+                                    <td>{{ evaluation.parameters.pregnancies }}</td>
+                                    <td>embarazos</td>
+                                </tr>
+                                <tr>
+                                    <td>Glucosa en Plasma</td>
+                                    <td>{{ evaluation.parameters.glucose }}</td>
+                                    <td>mg/dL</td>
+                                </tr>
+                                <tr>
+                                    <td>Presión Arterial Diastólica</td>
+                                    <td>{{ evaluation.parameters.blood_pressure }}</td>
+                                    <td>mmHg</td>
+                                </tr>
+                                <tr>
+                                    <td>Grosor Pliegue Cutáneo</td>
+                                    <td>{{ evaluation.parameters.skin_thickness }}</td>
+                                    <td>mm</td>
+                                </tr>
+                                <tr>
+                                    <td>Insulina Sérica</td>
+                                    <td>{{ evaluation.parameters.insulin }}</td>
+                                    <td>µU/mL</td>
+                                </tr>
+                                <tr>
+                                    <td>Índice de Masa Corporal (IMC)</td>
+                                    <td>{{ evaluation.parameters.bmi }}</td>
+                                    <td>kg/m²</td>
+                                </tr>
+                                <tr>
+                                    <td>Función de Pedigree Diabético</td>
+                                    <td>{{ evaluation.parameters.pedigree_function }}</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Edad</td>
+                                    <td>{{ evaluation.parameters.age }}</td>
+                                    <td>años</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recomendaciones -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-heart-pulse"></i> Recomendaciones Personalizadas</h5>
+                </div>
+                <div class="card-body">
+                    {% for recommendation in evaluation.result.recommendations %}
+                    <div class="recommendation-card">
+                        <p class="mb-0">{{ recommendation }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advertencia -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="alert alert-warning border-warning">
+                <h5 class="alert-heading">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Advertencia Importante
+                </h5>
+                <p class="mb-0">
+                    Este resultado es una <strong>estimación basada en modelos estadísticos</strong> y
+                    <strong>NO constituye un diagnóstico médico</strong>. Los resultados deben ser interpretados
+                    exclusivamente por un profesional de la salud calificado. Si tienes preocupaciones sobre tu salud,
+                    consulta con tu médico.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.formulario') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-repeat"></i> Nueva Evaluación
+            </a>
+            <a href="{{ url_for('main.historial') }}" class="btn btn-outline-secondary btn-lg ms-2">
+                <i class="bi bi-clock-history"></i> Ver Historial
+            </a>
+            <button onclick="window.print()" class="btn btn-outline-info btn-lg ms-2 no-print">
+                <i class="bi bi-printer"></i> Imprimir
+            </button>
+        </div>
+    </div>
+
+    <!-- ID de Evaluación -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <p class="text-muted">
+                <small>ID de Evaluación: {{ evaluation.id }}</small>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

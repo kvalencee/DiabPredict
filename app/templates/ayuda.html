@@ -1,10 +1,358 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Ayuda - DiabPredict{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5 fw-bold text-primary">
+                <i class="bi bi-question-circle"></i> Ayuda y Guía de Uso
+            </h1>
+            <p class="lead text-muted">
+                Aprende cómo usar DiabPredict y qué significan los parámetros clínicos
+            </p>
+        </div>
+    </div>
+
+    <!-- Cómo Funciona -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-info-circle"></i> ¿Cómo Funciona DiabPredict?</h4>
+                </div>
+                <div class="card-body">
+                    <p class="lead">
+                        DiabPredict utiliza tres modelos de Machine Learning entrenados con el dataset
+                        Pima Indians Diabetes para evaluar el riesgo de diabetes tipo 2.
+                    </p>
+
+                    <h5 class="mt-4">Proceso de Evaluación:</h5>
+                    <ol class="lead">
+                        <li class="mb-2"><strong>Ingreso de Datos:</strong> Completas el formulario con 8 parámetros
+                            clínicos</li>
+                        <li class="mb-2"><strong>Análisis:</strong> Los modelos procesan tus datos de forma segura y
+                            local</li>
+                        <li class="mb-2"><strong>Predicción:</strong> Se calcula la probabilidad de riesgo usando tres
+                            algoritmos diferentes</li>
+                        <li class="mb-2"><strong>Resultados:</strong> Recibes tu nivel de riesgo y recomendaciones
+                            personalizadas</li>
+                    </ol>
+
+                    <div class="alert alert-info mt-4">
+                        <h5 class="alert-heading"><i class="bi bi-shield-check"></i> Privacidad y Seguridad</h5>
+                        <p class="mb-0">
+                            Todos los datos se procesan localmente en tu dispositivo. No se envía información
+                            a servidores externos ni se comparte con terceros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parámetros Clínicos -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="bi bi-clipboard-pulse"></i> Parámetros Clínicos Explicados</h4>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="parametersAccordion">
+                        <!-- Embarazos -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse1">
+                                    <strong>1. Número de Embarazos</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Cantidad total de embarazos que ha tenido la persona.
+                                    </p>
+                                    <p><strong>¿Por qué importa?</strong> El embarazo puede afectar los niveles de
+                                        glucosa y el riesgo de diabetes gestacional.</p>
+                                    <p><strong>Rango:</strong> 0 - 20 embarazos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Glucosa -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse2">
+                                    <strong>2. Glucosa en Plasma (mg/dL)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Concentración de glucosa en sangre medida después de 2
+                                        horas de una prueba de tolerancia oral a la glucosa.</p>
+                                    <p><strong>¿Por qué importa?</strong> Es el indicador más directo de diabetes.
+                                        Niveles elevados indican problemas en el metabolismo de la glucosa.</p>
+                                    <p><strong>Valores de referencia:</strong></p>
+                                    <ul>
+                                        <li>Normal: &lt; 140 mg/dL</li>
+                                        <li>Prediabetes: 140-199 mg/dL</li>
+                                        <li>Diabetes: ≥ 200 mg/dL</li>
+                                    </ul>
+                                    <p><strong>Rango:</strong> 0 - 250 mg/dL</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Presión Arterial -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse3">
+                                    <strong>3. Presión Arterial Diastólica (mmHg)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> La presión arterial cuando el corazón está en reposo
+                                        entre latidos (el número inferior en una lectura de presión arterial).</p>
+                                    <p><strong>¿Por qué importa?</strong> La hipertensión es un factor de riesgo común
+                                        en personas con diabetes.</p>
+                                    <p><strong>Valores de referencia:</strong></p>
+                                    <ul>
+                                        <li>Normal: &lt; 80 mmHg</li>
+                                        <li>Elevada: 80-89 mmHg</li>
+                                        <li>Hipertensión: ≥ 90 mmHg</li>
+                                    </ul>
+                                    <p><strong>Rango:</strong> 40 - 140 mmHg</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grosor Pliegue Cutáneo -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse4">
+                                    <strong>4. Grosor del Pliegue Cutáneo del Tríceps (mm)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse4" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Medida del grosor de la piel y grasa subcutánea en la
+                                        parte posterior del brazo.</p>
+                                    <p><strong>¿Por qué importa?</strong> Indica el nivel de grasa corporal, que está
+                                        relacionado con la resistencia a la insulina.</p>
+                                    <p><strong>Rango:</strong> 0 - 99 mm</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insulina -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse5">
+                                    <strong>5. Insulina Sérica (µU/mL)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse5" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Nivel de insulina en sangre medido 2 horas después de
+                                        una carga de glucosa.</p>
+                                    <p><strong>¿Por qué importa?</strong> Niveles anormales pueden indicar resistencia a
+                                        la insulina o problemas en su producción.</p>
+                                    <p><strong>Rango:</strong> 0 - 850 µU/mL</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- IMC -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse6">
+                                    <strong>6. Índice de Masa Corporal (IMC)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse6" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Relación entre peso y altura (kg/m²).</p>
+                                    <p><strong>¿Por qué importa?</strong> El sobrepeso y la obesidad son factores de
+                                        riesgo principales para diabetes tipo 2.</p>
+                                    <p><strong>Categorías:</strong></p>
+                                    <ul>
+                                        <li>Bajo peso: &lt; 18.5</li>
+                                        <li>Normal: 18.5 - 24.9</li>
+                                        <li>Sobrepeso: 25 - 29.9</li>
+                                        <li>Obesidad: ≥ 30</li>
+                                    </ul>
+                                    <p><strong>Rango:</strong> 10.0 - 70.0 kg/m²</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Función Pedigree -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse7">
+                                    <strong>7. Función de Pedigree Diabético</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse7" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Valor que representa la probabilidad de diabetes basada
+                                        en el historial familiar.</p>
+                                    <p><strong>¿Por qué importa?</strong> La genética juega un papel importante en el
+                                        riesgo de diabetes.</p>
+                                    <p><strong>Interpretación:</strong></p>
+                                    <ul>
+                                        <li>Valores bajos (&lt; 0.5): Poco historial familiar</li>
+                                        <li>Valores medios (0.5 - 1.0): Historial familiar moderado</li>
+                                        <li>Valores altos (&gt; 1.0): Historial familiar significativo</li>
+                                    </ul>
+                                    <p><strong>Rango:</strong> 0.078 - 2.5</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edad -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse8">
+                                    <strong>8. Edad (años)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapse8" class="accordion-collapse collapse"
+                                data-bs-parent="#parametersAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>¿Qué es?</strong> Edad de la persona en años.</p>
+                                    <p><strong>¿Por qué importa?</strong> El riesgo de diabetes tipo 2 aumenta con la
+                                        edad, especialmente después de los 45 años.</p>
+                                    <p><strong>Rango:</strong> 18 - 120 años</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interpretación de Resultados -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h4 class="mb-0"><i class="bi bi-bar-chart"></i> Interpretación de Resultados</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Niveles de Riesgo:</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-success">
+                                <div class="card-body">
+                                    <h5 class="card-title text-success">Riesgo Bajo (&lt; 30%)</h5>
+                                    <p class="card-text">
+                                        Probabilidad baja de desarrollar diabetes. Mantén hábitos saludables
+                                        y realiza chequeos médicos regulares.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-warning">
+                                <div class="card-body">
+                                    <h5 class="card-title text-warning">Riesgo Medio (30% - 70%)</h5>
+                                    <p class="card-text">
+                                        Riesgo moderado. Se recomienda consultar con un profesional de la salud
+                                        y considerar cambios en el estilo de vida.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-danger">
+                                <div class="card-body">
+                                    <h5 class="card-title text-danger">Riesgo Alto (&gt; 70%)</h5>
+                                    <p class="card-text">
+                                        Riesgo elevado. Es importante consultar con un médico lo antes posible
+                                        para evaluación y posible intervención.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger mt-4">
+                        <h5 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Advertencia Importante</h5>
+                        <p class="mb-0">
+                            <strong>Este sistema NO reemplaza el diagnóstico médico profesional.</strong>
+                            Los resultados son estimaciones basadas en modelos estadísticos y deben ser
+                            interpretados por un profesional de la salud calificado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preguntas Frecuentes -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="bi bi-patch-question"></i> Preguntas Frecuentes</h4>
+                </div>
+                <div class="card-body">
+                    <h5>¿Es preciso el resultado?</h5>
+                    <p>
+                        Los modelos tienen una precisión del 75-76% basada en el dataset de entrenamiento.
+                        Sin embargo, cada persona es única y solo un médico puede dar un diagnóstico definitivo.
+                    </p>
+
+                    <h5 class="mt-4">¿Mis datos están seguros?</h5>
+                    <p>
+                        Sí. Todos los datos se procesan localmente en tu dispositivo y no se envían a ningún servidor
+                        externo.
+                    </p>
+
+                    <h5 class="mt-4">¿Con qué frecuencia debo hacer una evaluación?</h5>
+                    <p>
+                        Depende de tu situación personal. Consulta con tu médico sobre la frecuencia apropiada
+                        de monitoreo según tus factores de riesgo.
+                    </p>
+
+                    <h5 class="mt-4">¿Qué hago si obtengo un resultado de riesgo alto?</h5>
+                    <p>
+                        Consulta con un profesional de la salud lo antes posible. No te alarmes, pero tampoco
+                        ignores el resultado. La detección temprana es clave para la prevención.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Acción -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.formulario') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-clipboard-data"></i> Realizar Evaluación
+            </a>
+            <a href="{{ url_for('main.info_modelos') }}" class="btn btn-outline-secondary btn-lg ms-2">
+                <i class="bi bi-cpu"></i> Información de Modelos
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

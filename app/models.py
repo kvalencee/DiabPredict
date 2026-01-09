@@ -166,6 +166,20 @@ class EvaluationManager:
             print(f"Error al eliminar evaluación: {e}")
             return False
 
+    def clear_all_evaluations(self) -> bool:
+        """
+        Elimina todas las evaluaciones (borra el historial completo)
+
+        Returns:
+            True si se eliminó exitosamente, False en caso contrario
+        """
+        try:
+            self._save_evaluations([])
+            return True
+        except Exception as e:
+            print(f"Error al limpiar historial: {e}")
+            return False
+
     def get_statistics(self) -> Dict:
         """
         Obtiene estadísticas de las evaluaciones

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Servicio de predicción de diabetes usando modelos de Machine Learning
 """
 import joblib
@@ -39,10 +39,10 @@ class PredictionService:
                 self.models_dir / 'svm.pkl'
             )
 
-            print("✓ Modelos de ML cargados exitosamente")
+            print("[OK] Modelos de ML cargados exitosamente")
 
         except Exception as e:
-            print(f"✗ Error al cargar modelos: {e}")
+            print(f"[ERROR] Error al cargar modelos: {e}")
             raise
 
     def predict(self, parameters: Dict[str, float]) -> Dict:
@@ -129,17 +129,17 @@ class PredictionService:
         # Recomendaciones basadas en nivel de riesgo general
         if risk_level == 'Alto':
             recommendations.append(
-                "⚠️ IMPORTANTE: Su nivel de riesgo es ALTO. "
+                "[!] IMPORTANTE: Su nivel de riesgo es ALTO. "
                 "Consulte con un médico lo antes posible para una evaluación completa."
             )
         elif risk_level == 'Medio':
             recommendations.append(
-                "⚠️ ATENCIÓN: Su nivel de riesgo es MEDIO. "
+                "[!] ATENCIÓN: Su nivel de riesgo es MEDIO. "
                 "Se recomienda consultar con un profesional de la salud para evaluación adicional."
             )
         else:
             recommendations.append(
-                "✓ Su nivel de riesgo actual es BAJO. "
+                "[OK] Su nivel de riesgo actual es BAJO. "
                 "Mantenga hábitos de vida saludables y realice chequeos médicos regulares."
             )
 
@@ -148,89 +148,89 @@ class PredictionService:
         # Glucosa
         if parameters['glucose'] > 140:
             recommendations.append(
-                "🔴 Glucosa elevada: Su nivel de glucosa está por encima del rango normal. "
+                "[!] Glucosa elevada: Su nivel de glucosa está por encima del rango normal. "
                 "Reduzca el consumo de azúcares y carbohidratos refinados."
             )
         elif parameters['glucose'] > 100:
             recommendations.append(
-                "🟡 Glucosa en prediabetes: Monitoree su nivel de glucosa regularmente "
+                "[*] Glucosa en prediabetes: Monitoree su nivel de glucosa regularmente "
                 "y mantenga una dieta balanceada baja en azúcares."
             )
 
         # IMC
         if parameters['bmi'] > 30:
             recommendations.append(
-                "🔴 Obesidad: Su IMC indica obesidad. "
+                "[!] Obesidad: Su IMC indica obesidad. "
                 "La pérdida de peso puede reducir significativamente su riesgo de diabetes. "
                 "Consulte con un nutricionista."
             )
         elif parameters['bmi'] > 25:
             recommendations.append(
-                "🟡 Sobrepeso: Su IMC indica sobrepeso. "
+                "[*] Sobrepeso: Su IMC indica sobrepeso. "
                 "Incremente la actividad física y mantenga una dieta balanceada para alcanzar un peso saludable."
             )
         elif parameters['bmi'] < 18.5:
             recommendations.append(
-                "🟡 Bajo peso: Su IMC es menor al rango saludable. "
+                "[*] Bajo peso: Su IMC es menor al rango saludable. "
                 "Consulte con un profesional de la salud."
             )
 
         # Presión arterial
         if parameters['blood_pressure'] > 90:
             recommendations.append(
-                "🔴 Presión arterial elevada: Reduzca el consumo de sal, "
+                "[!] Presión arterial elevada: Reduzca el consumo de sal, "
                 "mantenga un peso saludable y realice ejercicio regular. "
                 "Consulte con su médico."
             )
         elif parameters['blood_pressure'] > 80:
             recommendations.append(
-                "🟡 Presión arterial en límite: Monitoree su presión arterial regularmente "
+                "[*] Presión arterial en límite: Monitoree su presión arterial regularmente "
                 "y mantenga hábitos de vida saludables."
             )
 
         # Edad
         if parameters['age'] > 45:
             recommendations.append(
-                "📋 Edad: A partir de los 45 años el riesgo de diabetes aumenta. "
+                "[i] Edad: A partir de los 45 años el riesgo de diabetes aumenta. "
                 "Se recomienda realizar chequeos médicos anuales incluyendo pruebas de glucosa."
             )
 
         # Insulina
         if parameters['insulin'] > 200:
             recommendations.append(
-                "🟡 Nivel de insulina elevado: Puede indicar resistencia a la insulina. "
+                "[*] Nivel de insulina elevado: Puede indicar resistencia a la insulina. "
                 "Consulte con un endocrinólogo para evaluación detallada."
             )
 
         # Historial familiar
         if parameters['pedigree_function'] > 1.0:
             recommendations.append(
-                "👨‍👩‍👧‍👦 Historial familiar significativo: Su función de pedigree diabético es elevada. "
+                "[FAM] Historial familiar significativo: Su función de pedigree diabético es elevada. "
                 "El factor genético es importante, extreme las medidas preventivas."
             )
 
         # Recomendaciones generales saludables
         recommendations.append(
-            "💪 Actividad física: Realice al menos 150 minutos de ejercicio moderado por semana "
+            "[+] Actividad física: Realice al menos 150 minutos de ejercicio moderado por semana "
             "(caminar, nadar, ciclismo)."
         )
 
         recommendations.append(
-            "🥗 Alimentación saludable: Consuma abundantes vegetales, frutas, granos enteros, "
+            "[+] Alimentación saludable: Consuma abundantes vegetales, frutas, granos enteros, "
             "proteínas magras y grasas saludables. Limite azúcares y alimentos procesados."
         )
 
         recommendations.append(
-            "💧 Hidratación: Beba suficiente agua durante el día (6-8 vasos). "
+            "[+] Hidratación: Beba suficiente agua durante el día (6-8 vasos). "
             "Evite bebidas azucaradas y alcohol en exceso."
         )
 
         recommendations.append(
-            "😴 Descanso: Duerma 7-8 horas diarias. El sueño insuficiente aumenta el riesgo de diabetes."
+            "[+] Descanso: Duerma 7-8 horas diarias. El sueño insuficiente aumenta el riesgo de diabetes."
         )
 
         recommendations.append(
-            "🚭 No fumar: Si fuma, busque ayuda para dejar el tabaco. "
+            "[+] No fumar: Si fuma, busque ayuda para dejar el tabaco. "
             "Fumar aumenta el riesgo de diabetes y sus complicaciones."
         )
 

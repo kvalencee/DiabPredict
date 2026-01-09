@@ -146,6 +146,17 @@ def get_evaluations():
     })
 
 
+@main_bp.route('/api/evaluations/clear-all', methods=['POST'])
+def clear_all_evaluations():
+    """Endpoint para eliminar todo el historial"""
+    success = evaluation_manager.clear_all_evaluations()
+
+    if success:
+        return jsonify({'message': 'Historial eliminado exitosamente'})
+    else:
+        return jsonify({'error': 'No se pudo eliminar el historial'}), 500
+
+
 @main_bp.route('/api/evaluations/<evaluation_id>', methods=['GET'])
 def get_evaluation(evaluation_id):
     """Endpoint para obtener una evaluación específica"""
@@ -166,6 +177,7 @@ def delete_evaluation(evaluation_id):
         return jsonify({'message': 'Evaluación eliminada exitosamente'})
     else:
         return jsonify({'error': 'No se pudo eliminar la evaluación'}), 500
+
 
 
 @main_bp.route('/api/statistics')
@@ -254,6 +266,14 @@ def validate_parameters(params: dict) -> list:
             else:
                 value = float(param_value)
 
+            # Validar que no sea negativo (excepto si el mínimo permite negativos)
+            if value < 0 and range_config['min'] >= 0:
+                errors.append({
+                    'field': param_name,
+                    'message': f'El valor no puede ser negativo'
+                })
+                continue
+
             # Validar rango
             if value < range_config['min'] or value > range_config['max']:
                 errors.append({
@@ -264,7 +284,7 @@ def validate_parameters(params: dict) -> list:
         except (ValueError, TypeError):
             errors.append({
                 'field': param_name,
-                'message': 'Valor inválido'
+                'message': 'Valor inválido (debe ser un número)'
             })
 
     return errors

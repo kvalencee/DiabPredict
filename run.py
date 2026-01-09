@@ -1,4 +1,4 @@
-"""
+﻿"""
 Punto de entrada principal para DiabPredict
 """
 import os
@@ -29,12 +29,12 @@ def main():
     print("=" * 70)
     print(" DIABPREDICT - Sistema de Predicción de Riesgo de Diabetes Tipo 2")
     print("=" * 70)
-    print(f"\n✓ Aplicación iniciada exitosamente")
-    print(f"✓ Servidor ejecutándose en: http://{host}:{port}")
-    print(f"✓ Modo: {config_name}")
+    print(f"\n[OK] Aplicación iniciada exitosamente")
+    print(f"[OK] Servidor ejecutándose en: http://{host}:{port}")
+    print(f"[OK] Modo: {config_name}")
 
     if not debug:
-        print(f"\n→ Abriendo navegador...")
+        print(f"\n--> Abriendo navegador...")
         # Abrir navegador automáticamente después de 1.5 segundos
         Timer(1.5, open_browser, args=[f"http://{host}:{port}"]).start()
 
@@ -51,11 +51,11 @@ def main():
         )
     except KeyboardInterrupt:
         print("\n\n" + "=" * 70)
-        print("✓ Servidor detenido correctamente")
+        print("[OK] Servidor detenido correctamente")
         print("=" * 70)
         sys.exit(0)
     except Exception as e:
-        print(f"\n✗ Error al iniciar el servidor: {e}")
+        print(f"\n[ERROR] Error al iniciar el servidor: {e}")
         sys.exit(1)
 
 

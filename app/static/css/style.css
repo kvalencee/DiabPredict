@@ -1,239 +1,330 @@
 /* ================================================
-   DiabPredict - Estilos Personalizados
+   DiabPredict - Professional Medical Interface
    ================================================ */
 
-/* Variables CSS */
+/* Variables CSS - Paleta Médica Profesional */
 :root {
-    --primary-color: #0d6efd;
-    --secondary-color: #6c757d;
-    --success-color: #198754;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #0dcaf0;
+    --primary-color: #2c5f8d;
+    --primary-dark: #1a3a54;
+    --secondary-color: #5a6c7d;
+    --success-color: #2d7a4f;
+    --danger-color: #c62828;
+    --warning-color: #f57c00;
+    --info-color: #0277bd;
+    --light-bg: #f8f9fa;
+    --border-color: #dee2e6;
 }
 
 /* Estilos globales */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--light-bg);
+    color: #212529;
+    line-height: 1.6;
 }
 
 main {
     flex: 1;
+    padding: 2rem 0;
 }
 
-/* Navbar personalizada */
+/* Navbar profesional */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    transform: translateY(-2px);
-    color: #fff !important;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 4px;
 }
 
-/* Cards */
+/* Cards profesionales */
 .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 0.5rem;
+    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .card-header {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    background-color: #fff;
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+    padding: 1rem 1.5rem;
 }
 
-/* Botones */
+.card-header.bg-primary {
+    background-color: var(--primary-color) !important;
+    border-bottom: none;
+}
+
+/* Botones profesionales */
 .btn {
-    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Formularios */
-.form-control:focus {
+.btn-primary {
+    background-color: var(--primary-color);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(44, 95, 141, 0.3);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #a71e1e;
+    border-color: #a71e1e;
+}
+
+/* Formularios profesionales */
 .form-label {
     font-weight: 600;
     color: #495057;
+    margin-bottom: 0.5rem;
 }
 
-/* Indicador de riesgo */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 0.75rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 95, 141, 0.15);
+}
+
+/* Indicadores de riesgo */
 .risk-indicator {
     padding: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 2rem 0;
-    animation: fadeIn 0.5s ease;
+    border: 2px solid;
+    margin-bottom: 2rem;
 }
 
-.risk-bajo {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: white;
+.risk-indicator.risk-bajo {
+    background-color: #e8f5e9;
+    border-color: var(--success-color);
+    color: var(--success-color);
 }
 
-.risk-medio {
-    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
-    color: white;
+.risk-indicator.risk-medio {
+    background-color: #fff3e0;
+    border-color: var(--warning-color);
+    color: #e65100;
 }
 
-.risk-alto {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
+.risk-indicator.risk-alto {
+    background-color: #ffebee;
+    border-color: var(--danger-color);
+    color: var(--danger-color);
 }
 
 /* Barra de probabilidad */
 .probability-bar {
-    height: 30px;
-    border-radius: 15px;
-    position: relative;
-    background: #e9ecef;
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 20px;
     overflow: hidden;
+    position: relative;
 }
 
 .probability-fill {
     height: 100%;
-    border-radius: 15px;
-    transition: width 1s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
+    transition: width 1s ease;
 }
 
 .probability-bajo {
-    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+    background: linear-gradient(90deg, var(--success-color), #4caf50);
 }
 
 .probability-medio {
-    background: linear-gradient(90deg, #ffc107 0%, #fd7e14 100%);
+    background: linear-gradient(90deg, var(--warning-color), #ff9800);
 }
 
 .probability-alto {
-    background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
+    background: linear-gradient(90deg, var(--danger-color), #e53935);
 }
 
-/* Recomendaciones */
-.recommendation-card {
-    border-left: 4px solid var(--primary-color);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: #f8f9fa;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
+/* Tabla de parámetros */
+.parameters-table {
+    margin-top: 1rem;
 }
 
-.recommendation-card:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transform: translateX(5px);
+.parameters-table th {
+    background-color: var(--light-bg);
+    font-weight: 600;
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--border-color);
 }
 
-/* Historial */
+.parameters-table td {
+    padding: 0.75rem;
+}
+
+/* Items de evaluación en historial */
 .evaluation-item {
-    border-left: 4px solid #dee2e6;
     padding: 1rem;
-    margin-bottom: 1rem;
-    background: white;
-    border-radius: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .evaluation-item:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transform: translateX(5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .evaluation-item.risk-bajo {
-    border-left-color: var(--success-color);
+    border-left: 4px solid var(--success-color);
 }
 
 .evaluation-item.risk-medio {
-    border-left-color: var(--warning-color);
+    border-left: 4px solid var(--warning-color);
 }
 
 .evaluation-item.risk-alto {
-    border-left-color: var(--danger-color);
+    border-left: 4px solid var(--danger-color);
 }
 
-/* Badges personalizados */
+/* Badges profesionales */
 .badge-risk-bajo {
     background-color: var(--success-color);
     color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 .badge-risk-medio {
     background-color: var(--warning-color);
-    color: #000;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 .badge-risk-alto {
     background-color: var(--danger-color);
     color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Estadísticas */
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
 }
 
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.fade-in {
-    animation: fadeIn 0.5s ease;
+/* Recomendaciones */
+.recommendation-card {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid var(--primary-color);
+    background-color: #f8f9fa;
+    border-radius: 4px;
 }
 
-.slide-in-left {
-    animation: slideInLeft 0.5s ease;
+/* Alertas profesionales */
+.alert {
+    border-radius: 6px;
+    border-left: 4px solid;
 }
 
-/* Spinner de carga */
-.spinner-border-sm {
-    width: 1rem;
-    height: 1rem;
-    border-width: 0.15em;
+.alert-warning {
+    background-color: #fff3cd;
+    border-left-color: var(--warning-color);
+    color: #856404;
 }
 
-/* Footer */
+.alert-info {
+    background-color: #d1ecf1;
+    border-left-color: var(--info-color);
+    color: #0c5460;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-left-color: var(--danger-color);
+    color: #721c24;
+}
+
+/* Footer profesional */
 footer {
-    margin-top: auto;
+    background-color: var(--primary-dark);
+    color: rgba(255,255,255,0.8);
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+footer a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Tooltips */
+.bi-info-circle {
+    cursor: help;
+    opacity: 0.7;
+}
+
+.bi-info-circle:hover {
+    opacity: 1;
 }
 
 /* Responsive */
@@ -241,81 +332,40 @@ footer {
     .navbar-brand {
         font-size: 1.2rem;
     }
-
-    .risk-indicator {
-        font-size: 1.5rem;
-        padding: 1.5rem;
+    
+    .stat-number {
+        font-size: 2rem;
     }
-
-    .card {
-        margin-bottom: 1rem;
+    
+    main {
+        padding: 1rem 0;
     }
 }
 
-/* Tabla de parámetros */
-.parameters-table {
-    font-size: 0.9rem;
-}
-
-.parameters-table th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-}
-
-.parameters-table td {
-    vertical-align: middle;
-}
-
-/* Estadísticas */
-.stat-card {
-    text-align: center;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Tooltip personalizado */
-.tooltip-inner {
-    max-width: 300px;
-    text-align: left;
-}
-
-/* Alertas personalizadas */
-.alert {
-    border-radius: 0.5rem;
-    border-left-width: 4px;
-}
-
-/* Iconos */
-.bi {
-    vertical-align: -0.125em;
-}
-
-/* Print styles */
+/* Impresión */
 @media print {
-    .navbar,
-    footer,
-    .btn,
     .no-print {
         display: none !important;
     }
-
+    
     .card {
-        border: 1px solid #dee2e6;
         box-shadow: none;
+        border: 1px solid #dee2e6;
     }
+}
+
+/* Animaciones sutiles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card, .evaluation-item {
+    animation: fadeIn 0.3s ease;
 }
